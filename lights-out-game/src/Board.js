@@ -69,6 +69,13 @@ class Board extends Component {
         board[r][c] = !board[r][c];
       }
     }
+    flipCell(r, c);
+    flipCell(r, c - 1);
+    flipCell(r, c + 1);
+    flipCell(r - 1, c);
+    flipCell(r + 1, c)
+    let hasWon = false;
+    this.setState({ board: board, hasWon: hasWon })
   }
 
   render() {
