@@ -41,10 +41,7 @@ class Board extends Component {
   }
 
   createBoard() {
-    //to create board, need to loop over the number of rows and cols, and in second loop, we are creating a row of booleans and pushing onto board.
-
     let board = [];
-
     //loop through numofRows array
     for (let r = 0; r < this.props.numOfRows; r++ ) {
       //for each item in numOfRows array, create an array for the item (that row)
@@ -61,43 +58,29 @@ class Board extends Component {
     return board 
   }
 
-  /** handle changing a cell: update board & determine if winner */
-
-  flipCellsAround(coord) {
+  flipCellsAround = (keyCoord) => {
+    console.log("SPIN IT!")
     let {numOfCols, numOfRows} = this.props;
     let board = this.state.board;
-    let [y, x] = coord.split("-").map(Number);
+    let [r, c] = keyCoord.split("-").map(Number);
 
-
-    function flipCell(y, x) {
-      // if this coord is actually on board, flip it
-
-      if (x >= 0 && x < numOfCols && y >= 0 && y < numOfRows) {
-        board[y][x] = !board[y][x];
+    let flipCell = (r, c) => {
+      if (c >= 0 && c < numOfCols && r >= 0 && r < numOfRows) {
+        board[r][c] = !board[r][c];
       }
     }
-
-    // TODO: flip this cell and the cells around it
-
-    // win when every cell is turned off
-    // TODO: determine is the game has been won
-
-    //this.setState({board, hasWon});
   }
-
-
-  /** Render game board or winning message. */
 
   render() {
     let tableBoard=[];
     for (let r = 0; r < this.props.numOfRows; r++) {
       let row = [];
       for (let c = 0; c < this.props.numOfCols; c++) {
-        row.push(<Cell isLit={ this.state.board[r][c]} />)
+        let keyCoord = `${r}-${c}`;
+        row.push(<Cell key={keyCoord} isLit={ this.state.board[r][c]} flipCellsAroundMe={() => this.flipCellsAround(keyCoord)} />)
       }
       tableBoard.push(<tr>{row}</tr>)
     }
-   
     return (
       <table className="Board">
         <tbody>
@@ -107,7 +90,6 @@ class Board extends Component {
     )
   }
 }
-
 
 export default Board;
 
