@@ -40,17 +40,24 @@ class Board extends Component {
     board: this.createBoard()
   }
 
-  createBoard (){
+  createBoard() {
     //to create board, need to loop over the number of rows and cols, and in second loop, we are creating a row of booleans and pushing onto board.
+
     let board = [];
-    
-    for(let r = 0; r < this.props.numOfRows; r++) {
+
+    //loop through numofRows array
+    for (let r = 0; r < this.props.numOfRows; r++ ) {
+      //for each item in numOfRows array, create an array for the item (that row)
       let row = [];
+      //for every instance of a row being created, each item in numOfRows, loop throgh the numOfCols array
       for (let c = 0; c < this.props.numOfCols; c++) {
+        //idk... something about determining what is lit...
         row.push(Math.random() < this.props.chanceLightStartsOn)
       }
+      //add that row to the board
       board.push(row)
     }
+    //this somehow is automatically set to state
     return board 
   }
 
@@ -82,14 +89,21 @@ class Board extends Component {
   /** Render game board or winning message. */
 
   render() {
+    let tableBoard=[];
+    for (let r = 0; r < this.props.numOfRows; r++) {
+      let row = [];
+      for (let c = 0; c < this.props.numOfCols; c++) {
+        row.push(<Cell isLit={ this.state.board[r][c]} />)
+      }
+      tableBoard.push(<tr>{row}</tr>)
+    }
+   
     return (
-    // if the game is won, just show a winning msg & render nothing else
-
-    // TODO
-      <h1>BOARD</h1>
-    // make table board
-
-    // TODO
+      <table className="Board">
+        <tbody>
+          {tableBoard}
+        </tbody>
+      </table>
     )
   }
 }
