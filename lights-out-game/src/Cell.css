@@ -2,7 +2,7 @@
   height: 100px;
   width: 100px;
   border-radius: 1px;
-  background-color: #263238;
+  background-color: rgb(64, 40, 95);
   transition: background-color 0.7s ease;
 }
 
