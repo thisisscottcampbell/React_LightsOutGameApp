@@ -44,7 +44,11 @@ class Board extends Component {
       }
     }
     flipCell(r, c);
-    
+    flipCell(r, c); 
+    flipCell(r, c - 1); 
+    flipCell(r, c + 1); 
+    flipCell(r - 1, c); 
+    flipCell(r + 1, c);
 
 
     let hasWon = board.every(row => row.every(cell => !cell));
