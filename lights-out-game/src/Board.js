@@ -43,7 +43,7 @@ class Board extends Component {
         board[r][c] = !board[r][c];
       }
     }
-    flipCell(r, c);
+   
     flipCell(r, c); 
     flipCell(r, c - 1); 
     flipCell(r, c + 1); 
